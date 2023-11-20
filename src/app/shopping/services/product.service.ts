@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { Product } from '../models/product';
 import { Category } from '../models/category';
@@ -10,6 +10,7 @@ import { Category } from '../models/category';
 export class ProductService {
   private BASE_URL: string = 'https://api.escuelajs.co/api/v1';
   private http = inject(HttpClient);
+  constructor() {}
 
   getProductById(id: number) {
     const url = `${this.BASE_URL}/products/${id}`;

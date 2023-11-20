@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, effect, signal } from '@angular/core';
 import { Product } from '../models/product';
 
 @Injectable({
@@ -6,5 +6,29 @@ import { Product } from '../models/product';
 })
 export class FavoriteService {
   public favorite = signal<Product[]>([]);
-  public isFavorite = signal<boolean>(false);
+
+  addProductFavorite(product: Product) {
+    this.favorite.update((state) => {
+      const index = state.find((item) => item.id === product.id);
+      if (index) {
+        return state.map((item) => {
+          if (item.id === product.id) {
+            return {
+              ...item,
+              isFavorite: true,
+            };
+          }
+          return item;
+        });
+      }
+      return [
+        ...state,
+        {
+          ...product,
+          isFavorite: true,
+        },
+      ];
+    });
+    console.log(this.favorite());
+  }
 }

@@ -4,10 +4,10 @@
   @for (product of products(); track product.id ){
   <div class="relative group max-w-xs">
     <button
-      (dblclick)="toggleFavorite(product)"
+      (dblclick)="addFavorite(product)"
       class="absolute top-5 right-10 translate-y-4 transition-all duration-500 rounded-full text-black text-xl p-3 bg-green-500 hover:bg-green-400 opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
     >
-      @if(isFavorite()){
+      @if(product.isFavorite){
 
       <svg
         xmlns="http://www.w3.org/2000/svg"

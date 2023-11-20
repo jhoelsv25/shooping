@@ -9,4 +9,5 @@ export interface Product {
   creationAt: string;
   category: Category;
   quantity?: number;
+  isFavorite?: boolean;
 }

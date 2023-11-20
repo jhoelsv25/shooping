@@ -24,8 +24,7 @@ export class CardProductComponent implements OnChanges {
   private productService = inject(ProductService);
   private cartService = inject(CartService);
   private favoriteService = inject(FavoriteService);
-  public isFavorite = this.favoriteService.isFavorite;
-  public products = signal<Product[]>([]);
+  @Input() public products = signal<Product[]>([]);
   private route = inject(ActivatedRoute);
   @Input() price!: number;
   ngOnInit(): void {
@@ -37,7 +36,7 @@ export class CardProductComponent implements OnChanges {
     this.cartService.addToCart(product);
   }
   toggleFavorite(product: Product) {
-    this.favoriteService.isFavorite.update((prev) => !prev);
+    //this.favoriteService.isFavorite.update((prev) => !prev);
   }
   ngOnChanges(change: SimpleChanges): void {
     if (change['price']) {
@@ -55,7 +54,7 @@ export class CardProductComponent implements OnChanges {
     });
   }
 
-  filterCategory() {
+  public filterCategory() {
     this.route.queryParams.subscribe((params) => {
       const categoryId = params['category_id'];
       if (categoryId) {
@@ -72,7 +71,7 @@ export class CardProductComponent implements OnChanges {
       }
     });
   }
-  searchProducts() {
+  public searchProducts() {
     this.route.queryParams.subscribe((params) => {
       const title = params['q'];
 
@@ -90,7 +89,7 @@ export class CardProductComponent implements OnChanges {
       }
     });
   }
-  filterByPrice() {
+  public filterByPrice() {
     const price_min = this.price;
     const price_max = this.price + 100;
     if (price_min) {
@@ -108,5 +107,9 @@ export class CardProductComponent implements OnChanges {
     } else {
       this.allProducts();
     }
+  }
+
+  public addFavorite(product: Product) {
+    this.favoriteService.addProductFavorite(product);
   }
 }
