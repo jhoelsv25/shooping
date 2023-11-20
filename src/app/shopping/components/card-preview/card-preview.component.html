@@ -1,0 +1,60 @@
+<section class="flex flex-wrap gap-5">
+  @for(product of carts(); track product.id){
+  <div
+    class="relative group w-full bg-zinc-500/30 flex hover:bg-zinc-800 rounded-md h-32"
+  >
+    <button
+      (click)="removeItem(product)"
+      class="absolute top-0 right-2 translate-y-0 transition-all duration-300 group-hover:translate-y-1 opacity-0 group-hover:opacity-100"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="1.5em"
+        height="1.5em"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+          d="M9.172 14.828L12.001 12m2.828-2.828L12.001 12m0 0L9.172 9.172M12.001 12l2.828 2.828M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10Z"
+        />
+      </svg>
+    </button>
+    <a
+      to="/playlist/1"
+      class="transition-all duration-300 flex flex-col overflow-hidden h-full shadow-lg hover:shadow-xl rounded-md"
+    >
+      <img
+        [src]="product.images[0]"
+        alt=""
+        class="h-full p-1 w-28 object-cover rounded-lg"
+      />
+    </a>
+    <footer class="px-1 flex flex-col justify-between py-2">
+      <small class="text-gray-500">{{ product.category.name }}</small>
+      <h4 class="text-sm truncate">{{ product.title }}</h4>
+      <h3 class="font-semibold py-2 text-sm">
+        {{ product.price | currency : "USD" }}
+      </h3>
+      <span class="flex gap-2 items-center">
+        <button
+          (click)="decrement(product)"
+          class="w-7 h-7 text-xs border border-gray-600 hover:bg-green-500 rounded-full flex items-center justify-center"
+        >
+          -1
+        </button>
+        <small class="text-sm font-bold">{{ product.quantity }}</small>
+        <button
+          (click)="increment(product)"
+          class="w-7 h-7 text-xs border border-gray-600 hover:bg-green-500 rounded-full flex items-center justify-center"
+        >
+          +1
+        </button>
+      </span>
+    </footer>
+  </div>
+  }
+</section>
