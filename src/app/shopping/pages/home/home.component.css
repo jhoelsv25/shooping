@@ -1,0 +1,21 @@
+#app {
+  display: grid;
+  grid-template-areas: "nav article";
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 1fr;
+  padding-top: 60px;
+  min-height: 100vh;
+}
+nav {
+  grid-area: nav;
+}
+article {
+  grid-area: article;
+}
+@media (max-width: 978px) {
+  #app {
+    grid-template-areas: "nav" "article";
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+}
