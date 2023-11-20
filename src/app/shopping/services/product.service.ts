@@ -11,8 +11,6 @@ export class ProductService {
   private BASE_URL: string = 'https://api.escuelajs.co/api/v1';
   private http = inject(HttpClient);
 
-  products = signal<Product[]>([]);
-
   getProductById(id: number) {
     const url = `${this.BASE_URL}/products/${id}`;
     return this.http.get<Product>(url);
@@ -29,6 +27,8 @@ export class ProductService {
   getFilterProducts(params?: {
     categoryId?: number;
     title?: string;
+    price_min?: number;
+    price_max?: number | string;
   }): Observable<Product[]> {
     const url = `${this.BASE_URL}/products/`;
     let httpParams = new HttpParams();
@@ -39,9 +39,13 @@ export class ProductService {
       if (params.title) {
         httpParams = httpParams.set('title', params.title);
       }
+      if (params.price_min) {
+        httpParams = httpParams.set('price_min', params.price_min.toString());
+      }
+      if (params.price_max) {
+        httpParams = httpParams.set('price_max', params.price_max.toString());
+      }
     }
-    return this.http
-      .get<Product[]>(url, { params: httpParams })
-      .pipe(tap((res) => this.products.set(res)));
+    return this.http.get<Product[]>(url, { params: httpParams });
   }
 }

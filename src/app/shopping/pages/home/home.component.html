@@ -5,8 +5,16 @@
     <app-category></app-category>
     <div class="flex items-center gap-2">
       <label for="price">Price</label>
-      <input type="range" class="bg-green-400" />
-      <small>153</small>
+      <input
+        type="range"
+        step="10"
+        min="0"
+        max="2000"
+        [value]="price()"
+        class="bg-green-400"
+        (input)="handlePriceChange($event)"
+      />
+      <small>{{ price() | currency : "USD" }}</small>
     </div>
   </nav>
   <article class="w-full overflow-hidden">
@@ -14,7 +22,7 @@
       <app-filter></app-filter>
     </header>
     <main class="overflow-y-auto px-6 h-full pb-24">
-      <card-product />
+      <card-product [price]="price()" />
     </main>
   </article>
 </section>

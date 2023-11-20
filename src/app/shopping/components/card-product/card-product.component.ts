@@ -1,5 +1,6 @@
 import {
   Component,
+  Input,
   OnChanges,
   SimpleChanges,
   inject,
@@ -26,7 +27,7 @@ export class CardProductComponent implements OnChanges {
   public isFavorite = this.favoriteService.isFavorite;
   public products = signal<Product[]>([]);
   private route = inject(ActivatedRoute);
-
+  @Input() price!: number;
   ngOnInit(): void {
     this.allProducts();
     this.filterCategory();
@@ -39,7 +40,9 @@ export class CardProductComponent implements OnChanges {
     this.favoriteService.isFavorite.update((prev) => !prev);
   }
   ngOnChanges(change: SimpleChanges): void {
-    console.log('on change');
+    if (change['price']) {
+      this.filterByPrice();
+    }
   }
   private allProducts() {
     this.productService.getProducts().subscribe({
@@ -86,5 +89,24 @@ export class CardProductComponent implements OnChanges {
         this.allProducts();
       }
     });
+  }
+  filterByPrice() {
+    const price_min = this.price;
+    const price_max = this.price + 100;
+    if (price_min) {
+      this.productService
+        .getFilterProducts({ price_min, price_max })
+        .subscribe({
+          next: (res) => {
+            this.products.set(res);
+            console.log(res);
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+    } else {
+      this.allProducts();
+    }
   }
 }
