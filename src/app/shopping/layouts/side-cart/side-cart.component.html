@@ -28,7 +28,10 @@
         <p class="text-lg">Total</p>
         <p class="text-lg">{{ total() | currency : "USD" }}</p>
       </div>
-      <button class="w-full bg-green-600 rounded-md py-2 font-bold text-white">
+      <button
+        routerLink="/cart"
+        class="w-full bg-green-500 rounded-md py-2 font-bold text-white"
+      >
         checkout
       </button>
     </footer>
