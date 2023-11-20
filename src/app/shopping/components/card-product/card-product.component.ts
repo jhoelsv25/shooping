@@ -56,7 +56,7 @@ export class CardProductComponent implements OnChanges {
     this.route.queryParams.subscribe((params) => {
       const categoryId = params['category_id'];
       if (categoryId) {
-        this.productService.getProducts({ categoryId }).subscribe({
+        this.productService.getFilterProducts({ categoryId }).subscribe({
           next: (res) => {
             this.products.set(res);
           },
@@ -64,6 +64,8 @@ export class CardProductComponent implements OnChanges {
             console.log(err);
           },
         });
+      } else {
+        this.allProducts();
       }
     });
   }
@@ -72,7 +74,7 @@ export class CardProductComponent implements OnChanges {
       const title = params['q'];
 
       if (title) {
-        this.productService.getProducts({ title }).subscribe({
+        this.productService.getFilterProducts({ title }).subscribe({
           next: (res) => {
             this.products.set(res);
           },
@@ -80,6 +82,8 @@ export class CardProductComponent implements OnChanges {
             console.log(err);
           },
         });
+      } else {
+        this.allProducts();
       }
     });
   }

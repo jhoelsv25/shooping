@@ -1,11 +1,20 @@
 <div class="flex justify-between p-6 items-center h-full">
-  <input
-    #searchInput
-    (change)="handleSearch(searchInput.value); searchInput.value = ''"
-    type="text"
-    placeholder="search products..."
-    class="rounded-lg py-1.5 px-5 focus:outline-none placeholder:text-gray-600 placeholder-opacity-50 text-black font-medium bg-gray-300 focus:bg-gray-100"
-  />
+  <span class="flex gap-3 items-center">
+    <input
+      #searchInput
+      (change)="handleSearch(searchInput.value); searchInput.value = ''"
+      type="text"
+      placeholder="search products..."
+      class="rounded-lg py-1.5 px-5 focus:outline-none placeholder:text-gray-600 placeholder-opacity-50 text-black font-medium bg-gray-300 focus:bg-gray-100"
+    />
+    <button
+      routerLink="/"
+      class="border border-gray-500 py-1.5 px-3 rounded-lg hover:bg-green-400 font-semibold"
+    >
+      Reset
+    </button>
+  </span>
+
   <div class="flex gap-3">
     <button class="text-gray-500 hover:text-white">
       <svg

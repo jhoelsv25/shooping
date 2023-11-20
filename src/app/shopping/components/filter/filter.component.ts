@@ -12,7 +12,6 @@ import { Router, RouterLinkWithHref } from '@angular/router';
 export class FilterComponent {
   private route = inject(Router);
   handleSearch(search: string) {
-    //* search by quesry params
     this.route.navigate(['/'], { queryParams: { q: search } });
   }
 }

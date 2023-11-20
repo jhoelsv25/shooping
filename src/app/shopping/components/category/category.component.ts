@@ -16,6 +16,13 @@ export class CategoryComponent {
   public categories = signal<Category[]>([]);
 
   ngOnInit() {
+    this.getCategories();
+  }
+  handleReset() {
+    this.productService.getProducts().subscribe();
+  }
+
+  private getCategories() {
     this.productService.getCategories().subscribe({
       next: (res) => {
         this.categories.set(res);

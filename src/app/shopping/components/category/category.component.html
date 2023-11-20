@@ -2,7 +2,7 @@
   <strong class="py-2">Categories:</strong>
   <ul>
     <li class="w-full border py-1.5 border-gray-600 px-5">
-      <a routerLink="/">All</a>
+      <a routerLink="/" (click)="handleReset()">All</a>
     </li>
     @for(category of categories(); track category.id){
 

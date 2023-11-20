@@ -6,6 +6,7 @@ import { Product } from '../models/product';
 })
 export class CartService {
   public cart = signal<Product[]>([]);
+
   public total = computed<number>(() => {
     const cart = this.cart();
     return cart.reduce(
