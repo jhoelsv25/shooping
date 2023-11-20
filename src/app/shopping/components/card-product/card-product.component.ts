@@ -27,26 +27,19 @@ export class CardProductComponent implements OnChanges {
   public products = signal<Product[]>([]);
   private route = inject(ActivatedRoute);
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.allProducts();
-    this.route.queryParams.subscribe((params) => {
-      const id = params['category_id'];
-      if (id) {
-        this.productService.getCategoryById(id).subscribe({
-          next: (res) => {
-            this.products.set(res);
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        });
-      } else {
-        this.allProducts();
-      }
-    });
+    this.filterCategory();
+    this.searchProducts();
   }
   addTocart(product: Product) {
     this.cartService.addToCart(product);
+  }
+  toggleFavorite(product: Product) {
+    this.favoriteService.isFavorite.update((prev) => !prev);
+  }
+  ngOnChanges(change: SimpleChanges): void {
+    console.log('on change');
   }
   private allProducts() {
     this.productService.getProducts().subscribe({
@@ -58,12 +51,36 @@ export class CardProductComponent implements OnChanges {
       },
     });
   }
-  ngOnChanges(change: SimpleChanges) {
-    console.log('on change');
-    const category = change['category_id'];
-  }
 
-  toggleFavorite(product: Product) {
-    this.favoriteService.isFavorite.update((prev) => !prev);
+  filterCategory() {
+    this.route.queryParams.subscribe((params) => {
+      const categoryId = params['category_id'];
+      if (categoryId) {
+        this.productService.getProducts({ categoryId }).subscribe({
+          next: (res) => {
+            this.products.set(res);
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
+    });
+  }
+  searchProducts() {
+    this.route.queryParams.subscribe((params) => {
+      const title = params['q'];
+
+      if (title) {
+        this.productService.getProducts({ title }).subscribe({
+          next: (res) => {
+            this.products.set(res);
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
+    });
   }
 }
