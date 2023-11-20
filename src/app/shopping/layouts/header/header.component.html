@@ -1,0 +1,77 @@
+<nav class="fixed top-0 z-30 w-full">
+  <div
+    class="flex flex-wrap items-center justify-between mx-auto container py-4"
+  >
+    <div class="flex items-center space-x-8">
+      <a href="https://flowbite.com/" class="flex items-center">
+        <img
+          src="https://flowbite.com/docs/images/logo.svg"
+          class="h-6 mr-3"
+          alt="Flowbite Logo"
+        />
+        <span class="self-center text-xl font-semibold whitespace-nowrap"
+          >Shooping</span
+        >
+      </a>
+      <ul class="flex space-x-6">
+        <li>
+          <a
+            routerLink="/"
+            class="block underline hover:underline cursor-pointer"
+            aria-current="page"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a routerLink="/cart" class="block hover:underline cursor-pointer"
+            >Cart</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/favorites"
+            class="block hover:underline cursor-pointer"
+            >favorite</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="flex items-center">
+      <button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1.5em"
+          height="1.5em"
+          viewBox="0 0 256 256"
+        >
+          <path
+            fill="currentColor"
+            d="M221.6 58.38a56.06 56.06 0 0 0-79.12-.08L128 71.78L113.52 58.3a56 56 0 0 0-79.15 79.25l89.36 90.66a6 6 0 0 0 8.54 0l89.33-90.62a56 56 0 0 0 0-79.21Zm-8.52 70.75L128 215.45L42.89 129.1a44 44 0 0 1 62.22-62.23a1.07 1.07 0 0 0 .16.14l18.64 17.36a6 6 0 0 0 8.18 0L150.73 67a1.07 1.07 0 0 0 .16-.14a44 44 0 1 1 62.19 62.26Z"
+          />
+        </svg>
+      </button>
+      <button class="px-4 text-white relative" (click)="toggleCart()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+          />
+        </svg>
+        <span
+          [class.opacity-0]="cart().length === 0"
+          class="absolute -top-1 right-1 w-5 h-5 rounded-full bg-green-500 text-xs flex items-center justify-center"
+          >{{ cart().length }}</span
+        >
+      </button>
+    </div>
+  </div>
+</nav>
+<side-cart [isOpen]="isOpen()"></side-cart>
