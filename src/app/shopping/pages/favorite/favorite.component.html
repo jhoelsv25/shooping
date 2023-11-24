@@ -1,8 +1,15 @@
 <section class="container mx-auto relative h-full min-h-screen">
   <article class="flex flex-col items-center">
+    <header class="flex justify-start w-full">
+      <a
+        class="hover:underline hover:text-green-500 text-lg py-5 cursor-pointer"
+        routerLink="/"
+        >Atras</a
+      >
+    </header>
     <h1 class="text-3xl font-bold pt-20">Products Favorites</h1>
     <div class="mt-5">
-      <card-product [products]="favorites" />
+      <card-product [products]="productsFavorite" />
     </div>
   </article>
 </section>

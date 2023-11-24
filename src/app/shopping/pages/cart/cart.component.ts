@@ -9,7 +9,6 @@ import { RouterLinkWithHref } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterLinkWithHref],
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.css',
 })
 export class CartComponent {
   private cartService = inject(CartService);

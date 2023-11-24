@@ -8,7 +8,6 @@ import { Product } from '../../models/product';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './card-preview.component.html',
-  styleUrl: './card-preview.component.css',
 })
 export class CardPreviewComponent {
   private cartService = inject(CartService);

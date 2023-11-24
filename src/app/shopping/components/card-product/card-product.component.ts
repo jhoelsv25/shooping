@@ -18,7 +18,6 @@ import { FavoriteService } from '../../services/favorite.service';
   standalone: true,
   imports: [CommonModule, RouterLinkWithHref],
   templateUrl: './card-product.component.html',
-  styleUrl: './card-product.component.css',
 })
 export class CardProductComponent implements OnChanges {
   private productService = inject(ProductService);
@@ -35,9 +34,7 @@ export class CardProductComponent implements OnChanges {
   addTocart(product: Product) {
     this.cartService.addToCart(product);
   }
-  toggleFavorite(product: Product) {
-    //this.favoriteService.isFavorite.update((prev) => !prev);
-  }
+
   ngOnChanges(change: SimpleChanges): void {
     if (change['price']) {
       this.filterByPrice();
@@ -91,14 +88,13 @@ export class CardProductComponent implements OnChanges {
   }
   public filterByPrice() {
     const price_min = this.price;
-    const price_max = this.price + 100;
+    const price_max = 3000;
     if (price_min) {
       this.productService
         .getFilterProducts({ price_min, price_max })
         .subscribe({
           next: (res) => {
             this.products.set(res);
-            console.log(res);
           },
           error: (err) => {
             console.log(err);

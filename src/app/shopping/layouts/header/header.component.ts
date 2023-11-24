@@ -8,7 +8,6 @@ import { RouterLinkWithHref } from '@angular/router';
   selector: 'app-header',
   standalone: true,
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css',
   imports: [CommonModule, SideCartComponent, RouterLinkWithHref],
 })
 export class HeaderComponent {

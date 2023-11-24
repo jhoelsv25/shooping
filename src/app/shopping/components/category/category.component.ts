@@ -9,7 +9,6 @@ import { RouterLinkWithHref } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterLinkWithHref],
   templateUrl: './category.component.html',
-  styleUrl: './category.component.css',
 })
 export class CategoryComponent {
   private productService = inject(ProductService);

@@ -15,7 +15,7 @@ export class FavoriteService {
           if (item.id === product.id) {
             return {
               ...item,
-              isFavorite: true,
+              isFavorite: !item.isFavorite,
             };
           }
           return item;
@@ -29,6 +29,5 @@ export class FavoriteService {
         },
       ];
     });
-    console.log(this.favorite());
   }
 }

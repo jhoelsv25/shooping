@@ -10,7 +10,6 @@ import { CartService } from '../../services/cart.service';
   standalone: true,
   imports: [CommonModule, RouterLinkWithHref],
   templateUrl: './product-detail.component.html',
-  styleUrl: './product-detail.component.css',
 })
 export class ProductDetailComponent {
   private productService = inject(ProductService);
