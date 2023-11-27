@@ -4,7 +4,7 @@
   @for (product of products(); track product.id ){
   <div class="relative group max-w-xs">
     <button
-      (dblclick)="addFavorite(product)"
+      (dblclick)="productFavorite(product)"
       class="absolute top-5 right-10 translate-y-4 transition-all duration-500 rounded-full text-black text-xl p-3 bg-green-500 hover:bg-green-400 opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
     >
       @if(product.isFavorite){

@@ -31,6 +31,18 @@ export class CardProductComponent implements OnChanges {
     this.filterCategory();
     this.searchProducts();
   }
+  productFavorite(item: Product) {
+    this.products.update((state) => {
+      const index = state.find((value) => value.id === item.id);
+      if (index) {
+        return state.map((prod) =>
+          prod.id === item.id ? { ...prod, isFavorite: !prod.isFavorite } : prod
+        );
+      }
+      return [...state, { ...item, isFavorite: true }];
+    });
+    this.addFavorite(item);
+  }
   addTocart(product: Product) {
     this.cartService.addToCart(product);
   }

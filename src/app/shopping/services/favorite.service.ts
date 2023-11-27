@@ -11,15 +11,11 @@ export class FavoriteService {
     this.favorite.update((state) => {
       const index = state.find((item) => item.id === product.id);
       if (index) {
-        return state.map((item) => {
-          if (item.id === product.id) {
-            return {
-              ...item,
-              isFavorite: !item.isFavorite,
-            };
-          }
-          return item;
-        });
+        return state.map((item) =>
+          item.id === product.id
+            ? { ...item, isFarite: !item.isFavorite }
+            : item
+        );
       }
       return [
         ...state,
