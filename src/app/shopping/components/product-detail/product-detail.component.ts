@@ -4,6 +4,7 @@ import { ProductService } from '../../services/product.service';
 import { ActivatedRoute, Router, RouterLinkWithHref } from '@angular/router';
 import { Product } from '../../models/product';
 import { CartService } from '../../services/cart.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-detail',
@@ -15,6 +16,7 @@ export class ProductDetailComponent {
   private productService = inject(ProductService);
   private cartService = inject(CartService);
   private route = inject(ActivatedRoute);
+  private title = inject(Title);
   public product = signal<Product | null>(null);
   public cover = signal<string>('');
 
@@ -26,6 +28,7 @@ export class ProductDetailComponent {
         next: (product) => {
           this.product.set(product);
           this.cover.set(product.images[0]);
+          this.title.setTitle('Shop | ' + product?.title);
         },
         error: (err) => {
           console.log(err);

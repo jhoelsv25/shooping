@@ -6,6 +6,7 @@ import { Product } from '../models/product';
 })
 export class CartService {
   public cart = signal<Product[]>([]);
+  public isOpen = signal<boolean>(true);
 
   public total = computed<number>(() => {
     const cart = this.cart();
@@ -69,9 +70,13 @@ export class CartService {
     this.cart.update((prevState) => {
       return prevState.map((item) =>
         item.id === cart.id
-          ? { ...item, quantity: (item.quantity ?? 1) - 1 }
+          ? { ...item, quantity: Math.max((item.quantity ?? 0) - 1, 1) }
           : item
       );
     });
+  }
+
+  public togleCart() {
+    this.isOpen.update((preState) => !preState);
   }
 }

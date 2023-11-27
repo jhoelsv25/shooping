@@ -11,10 +11,10 @@ import { RouterLinkWithHref } from '@angular/router';
   imports: [CommonModule, SideCartComponent, RouterLinkWithHref],
 })
 export class HeaderComponent {
-  public isOpen = signal<boolean>(true);
   private cartService = inject(CartService);
+  public isOpen = computed(() => this.cartService.isOpen());
   public cart = computed(() => this.cartService.cart());
   toggleCart() {
-    this.isOpen.update((preState) => !preState);
+    this.cartService.togleCart();
   }
 }
