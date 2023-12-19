@@ -2,7 +2,10 @@
   class="grid grid-cols-4 2xl:grid-cols-5 gap-3 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1"
 >
   @for (product of products(); track product.id ){
-  <div class="relative group max-w-xs">
+  <div
+    class="relative group max-w-xs"
+    [style]="'view-transiotion-name:' + product.id"
+  >
     <button
       (dblclick)="productFavorite(product)"
       class="absolute top-5 right-10 translate-y-4 transition-all duration-500 rounded-full text-black text-xl p-3 bg-green-500 hover:bg-green-400 opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
